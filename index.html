@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="ik4hDNYaOzas_Io8GoLNoRQ52YNHdptIomjv_5bLEpQ" />
     <title>حامل الجوال الذكي للسيارة | العرض الخاص في السعودية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -138,7 +139,7 @@
             font-size: 0.95rem;
         }
 
-        .form-group input, .form-group select {
+        .form-group input {
             width: 100%;
             padding: 12px;
             border: 1px solid #ccc;
@@ -170,6 +171,29 @@
             background: #1b5e20;
         }
 
+        .whatsapp-btn {
+            display: block;
+            text-align: center;
+            background-color: #25D366;
+            color: white;
+            padding: 15px 25px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            margin: 15px 20px 0 20px;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+        }
+
+        #status-msg {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+        }
+
         .guarantee-badges {
             display: flex;
             justify-content: space-around;
@@ -191,7 +215,7 @@
     <div class="container">
         <div class="hero-section">
             <h1 class="hero-title">حامل الجوال الذكي للسيارة 360 درجة</h1>
-            <p class="hero-subtitle">احمي نفسك من المخالفات واستمتع بقيادة آمنة وسهلة مع الحامل الأكثر ثباتاً على الإطلاق!</p>
+            <p class="hero-subtitle">احمي نفسك من المخالفات واستمتع بقيادة آمنة وسهولة مع الحامل الأكثر ثباتاً على الإطلاق!</p>
             
             <img src="https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?auto=format&fit=crop&w=800&q=80" alt="حامل الجوال" class="product-image">
         </div>
@@ -221,10 +245,9 @@
             </div>
         </div>
 
-        <!-- ORDER FORM -->
         <div class="order-form" id="order">
             <h2 class="form-title">أدخل معلوماتك للطلب الآن</h2>
-            <form action="PASTE_YOUR_COD_WEBHOOK_LINK_HERE" method="POST">
+            <form id="orderForm" action="https://formspree.io/f/mrpznann" method="POST">
                 <div class="form-group">
                     <label>الاسم الكامل *</label>
                     <input type="text" name="name" placeholder="أدخل اسمك الكامل" required>
@@ -245,9 +268,16 @@
                     <input type="text" name="address" placeholder="اسم الحي / الشارع">
                 </div>
 
-                <button type="submit" class="submit-btn">تأكيد الطلب (الدفع عند الاستلام) 🚚</button>
+                <button type="submit" id="submitBtn" class="submit-btn">تأكيد الطلب (الدفع عند الاستلام) 🚚</button>
             </form>
+
+            <div id="status-msg"></div>
         </div>
+
+        <a href="https://wa.me/84961641694?text=Hello!%20I%20would%20like%20to%20order%20the%20Car%20Phone%20Holder." 
+           target="_blank" class="whatsapp-btn">
+           📱 Order via WhatsApp
+        </a>
 
         <div class="guarantee-badges">
             <div>🚚<br>توصيل سريع</div>
@@ -256,13 +286,45 @@
         </div>
     </div>
 
+    <script>
+        const form = document.getElementById("orderForm");
+        const statusMsg = document.getElementById("status-msg");
+        const submitBtn = document.getElementById("submitBtn");
+
+        form.addEventListener("submit", async function(event) {
+            event.preventDefault();
+            submitBtn.disabled = true;
+            submitBtn.innerText = "جاري إرسال الطلب...";
+
+            const data = new FormData(form);
+
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    statusMsg.style.backgroundColor = "#d4edda";
+                    statusMsg.style.color = "#155724";
+                    statusMsg.innerText = "تم إرسال طلبك بنجاح! سيتصل بك فريقنا قريباً.";
+                    statusMsg.style.display = "block";
+                    form.reset();
+                } else {
+                    throw new Error("Network error");
+                }
+            } catch (error) {
+                statusMsg.style.backgroundColor = "#f8d7da";
+                statusMsg.style.color = "#721c24";
+                statusMsg.innerText = "حدث خطأ أثناء إرسال الطلب. حاول مرة أخرى.";
+                statusMsg.style.display = "block";
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = "تأكيد الطلب (الدفع عند الاستلام) 🚚";
+            }
+        });
+    </script>
+
 </body>
 </html>
-<a href="https://wa.me/84961641694?text=Hello!%20I%20would%20like%20to%20order%20the%20Car%20Phone%20Holder." 
-   target="_blank" 
-   style="display: inline-block; background-color: #25D366; color: white; padding: 15px 25px; text-decoration: none; font-weight: bold; border-radius: 8px; font-size: 18px;">
-   📱 Order via WhatsApp
-</a>
-<head>
-  <meta name="google-site-verification" content="ik4hDNYaOzas_Io8GoLNoRQ52YNHdptIomjv_5bLEpQ" />
-  ...
